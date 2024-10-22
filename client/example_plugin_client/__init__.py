@@ -28,7 +28,8 @@ class ExampleServiceProxy(server_object.ServerObject):
         next(self.plugin_client.resp_stream)
 
     def hello_string(self, data: str) -> str:
-        """ Call ExampleService.hello_string() on the server. """
+        """ Call ExampleService.hello_string() on the server. 
+        Returns a string containing the input data."""
 
         inputs = {'method': 'hello_string', 'data': data}
 
@@ -49,7 +50,8 @@ class ExampleServiceProxy(server_object.ServerObject):
         return results['result']
     
     def hello_table(self, table: Table, data: str) -> Table:
-        """ Call ExampleService.hello_table() on the server. """
+        """ Call ExampleService.hello_table() on the server. 
+        Returns a table generated from the input table and the input data."""
         
         inputs = {'method': 'hello_table', 'data': data}
 

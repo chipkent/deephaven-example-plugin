@@ -15,11 +15,11 @@ class ExampleService:
     """ Example service that echoes strings and tables. """
     
     def hello_string(self, data: str) -> str:
-        """ Echo a string back to the client. """
+        """ Returns a string containing the input data. """
         return f"Hello client.  You said: {data}"
     
     def hello_table(self, table: Table, data: str) -> Table:
-        """ Echo a table back to the client. """
+        """ Returns a table generated from the input table and the input data. """
         return table.update(["Client = data", "Server = `Hello client!`"])
 
 
