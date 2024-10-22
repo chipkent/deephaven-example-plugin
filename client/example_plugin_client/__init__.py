@@ -14,7 +14,7 @@ class ExampleServiceProxy(server_object.ServerObject):
         next(self.example_plugin.resp_stream)
 
     def echo_string(self, data: str) -> str:
-        message = {'method': 'echo', 'data': data}
+        message = {'method': 'echo_string', 'data': data}
         print(f"Sending message: {message}")
         json_string = json.dumps(message).encode("utf-8")
         print(f"Sending JSON: {json_string} {type(json_string)}")
@@ -27,14 +27,26 @@ class ExampleServiceProxy(server_object.ServerObject):
 
         self.example_plugin.req_stream.write(json_string, [])
         result_bytes, result_references = next(self.example_plugin.resp_stream)
-        return result_bytes.decode("utf-8")
+
+        result_json = json.loads(result_bytes.decode("utf-8"))
+
+        if 'error' in result_json:
+            raise Exception(result_json['error'])
+
+        return result_json['result']
     
     def echo_table(self, table: Table, label: str) -> Table:
-        message = {'method': 'get_table', 'label': label}
+        message = {'method': 'echo_table', 'data': label}
         json_string = json.dumps(message).encode("utf-8")
         self.example_plugin.req_stream.write(json_string, [table])
         result_bytes, result_references = next(self.example_plugin.resp_stream)
-        return result_references[0]
+
+        result_json = json.loads(result_bytes.decode("utf-8"))
+
+        if 'error' in result_json:
+            raise Exception(result_json['error'])
+        
+        return result_references[0].fetch()
 
 
 
