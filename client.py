@@ -24,3 +24,5 @@ table_result = shell.echo_table(t, "Hello, world!")
 print(f"Table result: {table_result} {type(table_result)}")
 print("Table result:")
 print(table_result.to_arrow().to_pandas())
+
+session.close()
