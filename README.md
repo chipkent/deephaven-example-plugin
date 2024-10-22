@@ -7,11 +7,11 @@ Relevant code:
 * [./client](./client/): The client-side plugin.
 * [./client.py](./client.py): A script to setup and run the client.
 
-In one console run:
+In one console, start the server:
 ```bash
 ./server.py
 ```
-and in another console run:
+In another console, run the client:
 ```bash
 ./client.py
 ```
