@@ -1,7 +1,7 @@
 
 """ This module provides a server-side plugin for accessing an ExampleService object. """
 
-from typing import List, Any
+from typing import List, Any, override
 import json
 import traceback
 from deephaven.plugin.object_type import MessageStream, BidirectionalObjectType
@@ -33,6 +33,7 @@ class ExampleServiceMessageStream(MessageStream):
         # Send an empty payload to the client to acknowledge successful connection
         self.client_connection.on_data(b'', [])
 
+    @override
     def on_data(self, payload: bytes, references: List[Any]):
         """ Called when the client sends a message to the server. """
 
@@ -67,7 +68,7 @@ class ExampleServiceMessageStream(MessageStream):
         json_string = json.dumps(result_payload).encode("utf-8")
         self.client_connection.on_data(payload=json_string, references=result_references)
 
-
+    @override
     def on_close(self):
         """ Called when the client closes the connection. """
         print("Client connection closed.")
@@ -77,14 +78,17 @@ class ExampleServicePlugin(BidirectionalObjectType):
     """ Plugin for ExampleService. """
 
     @property
+    @override
     def name(self) -> str:
         """ Get the name of the service. """
         return "ExampleService"
 
+    @override
     def is_type(self, object) -> bool:
         """ Check if an object is an ExampleService. """
         return isinstance(object, ExampleService)
 
+    @override
     def create_client_connection(self, obj: ExampleService, connection: MessageStream) -> MessageStream:
         """ Create a connection to an ExampleService instance. """
         return ExampleServiceMessageStream(obj, connection)
@@ -94,6 +98,7 @@ class ExampleServicePluginRegistration(Registration):
     """ Registration for ExampleServicePlugin. """
 
     @classmethod
+    @override
     def register_into(cls, callback: Callback) -> None:
         """ Register the ExampleServicePlugin. """
         callback.register(ExampleServicePlugin)
