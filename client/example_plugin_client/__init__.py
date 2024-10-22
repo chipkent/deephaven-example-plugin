@@ -27,10 +27,10 @@ class ExampleServiceProxy(server_object.ServerObject):
         # Consume the first (empty) payload from the server to acknowledge successful connection
         next(self.plugin_client.resp_stream)
 
-    def echo_string(self, data: str) -> str:
-        """ Echo a string. """
+    def hello_string(self, data: str) -> str:
+        """ Call ExampleService.hello_string() on the server. """
 
-        inputs = {'method': 'echo_string', 'data': data}
+        inputs = {'method': 'hello_string', 'data': data}
 
         # serialize the inputs to JSON bytes
         input_bytes = json.dumps(inputs).encode("utf-8")
@@ -48,10 +48,10 @@ class ExampleServiceProxy(server_object.ServerObject):
         # return the result string
         return results['result']
     
-    def echo_table(self, table: Table, data: str) -> Table:
-        """ Echo a table. """
+    def hello_table(self, table: Table, data: str) -> Table:
+        """ Call ExampleService.hello_table() on the server. """
         
-        inputs = {'method': 'echo_table', 'data': data}
+        inputs = {'method': 'hello_table', 'data': data}
 
         # serialize the inputs to JSON bytes
         input_bytes = json.dumps(inputs).encode("utf-8")
