@@ -1,6 +1,8 @@
 #!/bin/bash
 
-rm -rf ./venv
+# Create a virtual environment for the client, install the client plugin, and run the client
+
+rm -rf ./venv-client
 python3.12 -m venv ./venv-client
 source ./venv-client/bin/activate
 python -m pip install --upgrade pip
