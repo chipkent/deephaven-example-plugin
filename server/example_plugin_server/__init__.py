@@ -36,7 +36,7 @@ class ExampleServiceMessageStream(MessageStream):
     def on_data(self, payload: bytes, references: List[Any]):
         """ Called when the client sends a message to the server. """
 
-        #TODO: input is labled as bytes, but it is actually a java byte array -> bug to be fixed... line below must also be fixed
+        #TODO: input is labeled as bytes, but it is actually a java byte array -> bug to be fixed... line below must also be fixed
 
         input_string = bytes(payload).decode("utf-8")
         print(f"Received data from client: {input_string}")

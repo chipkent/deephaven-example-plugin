@@ -17,7 +17,7 @@ class ExampleServiceProxy(server_object.ServerObject):
     """
 
     def __init__(self, plugin_client: plugin_client.PluginClient):
-        #TODO: change the assignment to the constructor call in 0.37
+        #TODO: change the assignments to the constructor call in 0.37
         # super().__init__(type=plugin_client.type_, ticket=plugin_client.ticket)
         self.type_ = plugin_client.type_
         self.ticket = plugin_client.ticket
